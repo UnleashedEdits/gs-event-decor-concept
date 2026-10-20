@@ -1,0 +1,356 @@
+/* GS Event Decor: an editorial poster system with restrained print halftones. */
+:root {
+  --paper: #f7f2e9;
+  --wine: #76364b;
+  --ink: #321e25;
+  --rose: #bb7381;
+  --dot-light: radial-gradient(circle, #f7e3c7 1.15px, transparent 1.4px);
+  --dot-dark: radial-gradient(circle, #76364b 1px, transparent 1.25px);
+}
+
+body { background: var(--paper); }
+h2 { font-weight: 600; }
+.button { box-shadow: 5px 5px 0 color-mix(in srgb, var(--gold) 78%, var(--ink)); }
+.button:hover { box-shadow: 7px 7px 0 color-mix(in srgb, var(--gold) 78%, var(--ink)); }
+.header .button { box-shadow: 4px 4px 0 #915166; }
+
+/* The opening is a photographic poster, with its print pattern kept off the images. */
+.hero { border-bottom: 9px solid var(--gold); }
+.hero::before {
+  opacity: .35;
+  background-image: var(--dot-light);
+  background-size: 10px 10px;
+  mask-image: linear-gradient(90deg, transparent 24%, #000 82%);
+}
+.hero::after { border-width: 2px; opacity: .8; }
+.hero-copy::after {
+  content: "";
+  position: absolute;
+  right: 5%;
+  bottom: 8%;
+  width: 65px;
+  height: 65px;
+  border: 1px solid #f6dfbf;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px #f6dfbf25, 0 0 0 9px #f6dfbf90;
+  pointer-events: none;
+}
+.hero .eyebrow { letter-spacing: 2.3px; }
+.hero .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.hero-photo-strip img { box-shadow: 12px 14px 0 #4b233455, 0 20px 42px #32131e50; }
+
+/* The portfolio sits on warm paper, with a visible print block behind the carousel. */
+#work { position: relative; isolation: isolate; overflow: hidden; }
+#work::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 70px;
+  right: -8%;
+  width: min(42vw, 590px);
+  height: 370px;
+  background: var(--dot-dark);
+  background-size: 9px 9px;
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 73%);
+  opacity: .27;
+  pointer-events: none;
+}
+#work .section-heading { padding-bottom: 24px; border-bottom: 1px solid #7b465553; }
+#work h2 { color: var(--ink); }
+#projects { padding-top: 28px; }
+#projects .project-card:nth-child(n) {
+  border: 1px solid #71414b80;
+  box-shadow: 6px 6px 0 #9b606f55;
+}
+#projects .project-card:nth-child(3n+2) { box-shadow: 6px 6px 0 #c9a35f80; }
+#projects .project-card:nth-child(3n) { box-shadow: 6px 6px 0 #43212b66; }
+#projects .carousel-caption { border-top: 5px solid var(--gold); }
+#projects .caption-category { color: #75384c; font-weight: 700; }
+.carousel-controls button { background: var(--paper); border: 1px solid var(--ink); box-shadow: 3px 3px 0 #a15c6d70; }
+
+/* Occasions become individual invitations within a dark, dotted chapter. */
+.services {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--ink);
+  border-top: 8px solid var(--rose);
+  border-bottom: 8px solid var(--gold);
+}
+.services::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--dot-light);
+  background-size: 11px 11px;
+  opacity: .11;
+  pointer-events: none;
+}
+.services::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 410px;
+  height: 410px;
+  border: 55px solid #a8526a4a;
+  border-radius: 50%;
+  left: -230px;
+  bottom: -230px;
+  pointer-events: none;
+}
+.services .service-intro h2 { font-size: clamp(52px, 5vw, 82px); font-weight: 600; line-height: .99; }
+.services .service-intro h2 em { color: #e3b579; }
+.services .service-intro p { margin-top: 28px; line-height: 1.75; }
+.services .text-link { color: #f5d5aa; }
+.services #service-list { display: grid; gap: 12px; }
+.services details {
+  position: relative;
+  overflow: hidden;
+  background: #4b2735;
+  border: 1px solid #daa97783;
+  box-shadow: 5px 5px 0 #ae647955;
+}
+.services details:nth-child(2) { background: #643249; }
+.services details:nth-child(3) { background: #553b40; }
+.services details::after {
+  content: "";
+  position: absolute;
+  right: -15px;
+  bottom: -22px;
+  width: 125px;
+  height: 125px;
+  background: var(--dot-light);
+  background-size: 8px 8px;
+  opacity: .23;
+  mask-image: radial-gradient(circle, #000 20%, transparent 70%);
+  pointer-events: none;
+}
+.services summary { padding: 20px 44px 20px 25px; font-weight: 600; }
+.services summary::after { right: 20px; color: var(--gold); }
+.services .service-summary { color: #f2e2d9; opacity: 1; }
+.services .service-body { padding: 0 25px 24px; max-width: 550px; }
+
+/* A framed image and an ornamented story panel. */
+.about { position: relative; isolation: isolate; }
+.about::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 6%;
+  left: -7%;
+  width: min(57vw, 740px);
+  height: 77%;
+  border-radius: 50%;
+  background: #e9cdd0;
+  opacity: .68;
+  pointer-events: none;
+}
+.about::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 14%;
+  left: 18%;
+  width: min(30vw, 400px);
+  height: 260px;
+  background: var(--dot-dark);
+  background-size: 8px 8px;
+  opacity: .26;
+  mask-image: radial-gradient(ellipse, #000 25%, transparent 72%);
+  pointer-events: none;
+}
+.about-art:has(img) { padding: 12px; border: 1px solid #793f51; box-shadow: 14px 14px 0 #b76c7e; }
+.about-copy { position: relative; padding: 36px 24px 38px; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.about-copy::after { content: "✧"; position: absolute; right: 10px; top: 6px; font-size: 35px; line-height: 1; color: #a6566b; }
+.about-copy h2 { color: var(--ink); }
+.about-copy .area { border-left: 3px solid #a6566b; padding-left: 15px; }
+
+/* The conversation path uses three tactile cards, with no numbered labels. */
+#process {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #e9d7d1;
+  border-top: 7px solid #8c4559;
+  border-bottom: 7px solid #8c4559;
+}
+#process::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--dot-dark);
+  background-size: 11px 11px;
+  opacity: .12;
+  mask-image: linear-gradient(90deg, #000, transparent 48%, #000);
+  pointer-events: none;
+}
+#process .section-heading { border-bottom: 1px solid #6c354c7d; padding-bottom: 28px; }
+#process h2 { color: var(--ink); }
+#process .steps { gap: 18px; }
+#process .step {
+  position: relative;
+  overflow: hidden;
+  min-height: 245px;
+  padding: 28px;
+  border: 1px solid var(--ink);
+  background: #f9f0df;
+  box-shadow: 6px 6px 0 #6e3346;
+}
+#process .step:nth-child(2) { background: #683347; color: #fff5eb; box-shadow: 6px 6px 0 #d4ae71; }
+#process .step:nth-child(3) { background: #e6bbad; }
+#process .step::after {
+  content: "✦";
+  position: absolute;
+  top: 15px;
+  right: 23px;
+  font-size: 21px;
+  color: #ad5e72;
+}
+#process .step:nth-child(2)::after { color: #e0be83; }
+#process .step h3 { max-width: 250px; margin: 26px 0 12px; font-weight: 600; }
+#process .step p { color: inherit; opacity: .82; }
+
+/* Fine dotwork gives the questions their own page instead of a blank gap. */
+.faq { position: relative; isolation: isolate; }
+.faq::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 35px;
+  right: -2%;
+  width: 42%;
+  height: 250px;
+  background: var(--dot-dark);
+  background-size: 9px 9px;
+  opacity: .15;
+  mask-image: radial-gradient(ellipse, #000 5%, transparent 72%);
+  pointer-events: none;
+}
+.faq h2 { color: var(--ink); }
+.faq h2 em { color: #9e4b63; }
+.faq details { background: #fbf6ed; border-bottom: 1px solid #7d4e5b80; padding: 0 18px; }
+.faq details:first-child { border-top: 2px solid var(--ink); }
+.faq details[open] { background: #f0e4d8; }
+.faq summary { font-family: Georgia, serif; font-size: 18px; font-weight: 600; }
+.faq summary::after { color: #a25067; }
+
+/* The final invitation repeats the poster texture while the message helper stays quiet. */
+.contact { position: relative; isolation: isolate; overflow: hidden; background: #633047; border-top: 8px solid #d7ad72; }
+.contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--dot-light);
+  background-size: 10px 10px;
+  opacity: .2;
+  mask-image: linear-gradient(90deg, #000, transparent 70%);
+  pointer-events: none;
+}
+.contact::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -100px;
+  bottom: -280px;
+  width: 530px;
+  height: 530px;
+  border: 60px solid #d6a5a146;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.contact h2 { font-weight: 600; line-height: .98; }
+.contact h2 em { color: #f1c68f; }
+.contact .contact-primary { margin-top: 28px; background: #f6e4c4; border: 1px solid #321e25; box-shadow: 7px 7px 0 #d29a62; font-weight: 700; }
+.contact .contact-primary:hover { background: #fff2db; }
+.message-card { position: relative; overflow: hidden; background: #fff5e7; border: 2px solid #38202a; box-shadow: 10px 10px 0 #d2a476; }
+.message-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 175px;
+  height: 140px;
+  background: var(--dot-dark);
+  background-size: 8px 8px;
+  opacity: .16;
+  mask-image: linear-gradient(225deg, #000, transparent 75%);
+  pointer-events: none;
+}
+.message-card h3 { position: relative; font-weight: 600; }
+.message-card input,.message-card select,.message-card textarea { background: #fffaf2; border-color: #896872; }
+.message-card .button { box-shadow: 4px 4px 0 #ae6875; }
+
+footer { position: relative; isolation: isolate; overflow: hidden; }
+footer::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 15px;
+  width: 220px;
+  height: 220px;
+  background: var(--dot-dark);
+  background-size: 8px 8px;
+  opacity: .12;
+  mask-image: radial-gradient(circle, #000 12%, transparent 72%);
+  pointer-events: none;
+}
+.footer-display { color: var(--ink); }
+.footer-top { border-top: 1px solid #7e4b5966; }
+
+.concept-tag {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  padding: 5px 9px;
+  border: 1px solid currentColor;
+  color: #fff2d9;
+  font: 700 9px/1.2 Arial, sans-serif;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: rotate(-2deg);
+}
+.concept-tag::before { content: "✦"; margin-right: 6px; color: #f1c68f; }
+.concept-tag-footer { color: #713d4e; border-color: #a97a81; transform: none; }
+.concept-tag-footer::before { color: #a25067; }
+[data-concept-label][hidden] { display: none; }
+
+@media (max-width: 760px) {
+  .hero .eyebrow { flex-wrap: wrap; gap: 9px; }
+  .hero .concept-tag { margin-left: auto; font-size: 8px; }
+  .concept-tag-footer { font-size: 8px; }
+  .hero-copy::after { width: 36px; height: 36px; right: 9%; bottom: 3%; }
+  .hero::before { background-size: 8px 8px; opacity: .25; }
+  #work::before { top: 36px; right: -70px; width: 260px; height: 240px; }
+  #work .section-heading { padding-bottom: 16px; }
+  #projects { padding-top: 18px; }
+  .services::after { width: 300px; height: 300px; left: -215px; bottom: -210px; }
+  .services summary { padding: 18px 40px 18px 18px; }
+  .services summary::after { right: 16px; }
+  .services .service-body { padding: 0 18px 20px; }
+  .about::before { left: -18%; top: 3%; width: 115%; height: 52%; }
+  .about::after { top: 4%; left: 25%; width: 80%; height: 230px; }
+  .about-art:has(img) { box-shadow: 8px 8px 0 #b76c7e; }
+  .about-copy { padding: 22px 8px 26px; }
+  #process .section-heading { align-items: flex-start; gap: 20px; }
+  #process .steps { gap: 16px; }
+  #process .step { min-height: 200px; padding: 22px; }
+  #process .step h3 { margin-top: 20px; }
+  .faq summary { font-size: 16px; }
+  .contact .contact-primary { width: 100%; }
+  .message-card { box-shadow: 6px 6px 0 #d2a476; }
+}
+
+@media (max-width: 560px) {
+  #process .steps { grid-template-columns: 1fr; }
+  #process .step { min-height: 0; }
+  .services .service-intro h2 { font-size: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,.carousel-controls button { transition: none; }
+}
